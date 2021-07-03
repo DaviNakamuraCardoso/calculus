@@ -8,88 +8,81 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "quicksort.h"
+#include "benchmark.h"
 
-#define ARRSIZE 10
+#define ARRSIZE 100
 
-static void printarr(long* arr, unsigned long size)
+
+int main(int argc, const char** argv)
 {
-    for (unsigned long i = 0; i < size; i++)
-    {
-        printf("%li, ", arr[i]);
-    }
+    long double d = benchmark(sort);
 
-    return;
-}
-
-
-int main(void)
-{
-    long arr[10] = {0};
-
-    create_arr(arr, 10);
-
-    for (int i = 0; i < 10; i++)
-    {
-        printf("%li\n", arr[i]);
-    }
-
-    sort(arr, 10);
-
+    printf("%Lf\n", d);
     return 0;
-
 }
 
 void sort(long* arr, unsigned long size)
 {
     long pivot, *less, *more, lsize = 0, msize = 0;
 
-    if (size == 1) return;
+    if (size <= 1) return;
 
     pivot = arr[0];
 
-    printf("%li\n", pivot);
+    less = (long*) calloc(size, sizeof(long));
+    more = (long*) calloc(size, sizeof(long));
 
-    less = calloc(size, sizeof(long));
-    more = calloc(size, sizeof(long));
-
-    for (unsigned long i = 0; i < size; i++)
+    for (unsigned long i = 1; i < size; i++)
     {
         if (arr[i] < pivot)
         {
             less[lsize++] = arr[i];
         }
-        else
+        else if (arr[i])
         {
             more[msize++] = arr[i];
         }
     }
 
-    // printf("%li\n", lsize);
-    // printf("%li\n", msize);
 
     sort(more, msize);
     sort(less, lsize);
 
-
     for (unsigned int i = 0; i < size; i++)
     {
-        if (i < lsize) arr[i] = less[i];
-        else arr[i] = more[i-lsize];
+        if (i < lsize)
+        {
+            arr[i] = less[i];
+        }
+        else if (i == lsize)
+        {
+            arr[i] = pivot;
+        }
+        else
+        {
+            arr[i] = more[i-lsize-1];
+        }
     }
 
     free(more);
     free(less);
 
-
     return;
 }
 
 
-void create_arr(long *arr, unsigned long size)
+static void printarr(long* arr, unsigned long size)
+{
+    fprintarr(stdout, arr, size);
+    return;
+}
+
+static void fprintarr(FILE* f, long* arr, unsigned long size)
 {
     for (unsigned long i = 0; i < size; i++)
     {
-        arr[i] = rand() % 200;
+        fprintf(f, "%li\n", arr[i]);
     }
+
     return;
 }

@@ -1,3 +1,3 @@
 
-quicksort: quicksort.c quicksort.h
-	gcc quicksort.h quicksort.c -o quicksort
+quicksort: quicksort.c quicksort.h benchmark.h benchmark.c
+	gcc benchmark.c quicksort.c -o quicksort
