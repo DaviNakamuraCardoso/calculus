@@ -8,7 +8,7 @@
 #include <ctype.h>
 
 
-static void skip_noise(void)
+static void skipnoise(void)
 {
     char c; 
 
@@ -34,7 +34,7 @@ void makewords(void)
         else
         {
             fputc(20, stdout);
-            skip_noise(); 
+            skipnoise(); 
         }
     }
     return;
