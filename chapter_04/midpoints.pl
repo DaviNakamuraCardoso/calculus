@@ -2,7 +2,7 @@
 
 
 my $filename = $ARGV[0]; 
-my $interval = 24*60*60;
+my $interval = 20;
 
 my $sum = 0;
 
@@ -17,14 +17,10 @@ for (my $i = 0; my $line = <$data>; $i++)
 
     $new = $fields[1];
 
-    my $value = ($new + $prev) / 2;
-    $sum += $value * $interval;
-    print "$sum\n"; 
+    my $value = $new;
+    $sum += $value;
 
-    $prev = $new;  
 }
 
-$sum += ($prev * $interval) / 2;
-
-
+$sum *= $interval;
 print "The sum is $sum\n"; 
