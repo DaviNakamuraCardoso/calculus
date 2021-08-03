@@ -65,13 +65,25 @@ static ld df6(ld x)
 {
     return (-1/(x*x) - 1/(pow(x*x, 1/3)));
 }
+
+static ld f7(ld x)
+{
+    return powl(x-4, 2) - logl(x);
+
+}
+
+static ld df7(ld x)
+{
+    return 2*(x-4) - 1/x;
+} 
+
 ld newton(ld val, ld (*f) (ld), ld (*df) (ld), unsigned int iterations)
 {
     ld x = val;  
 
     for (unsigned int i = 0; i < iterations; i++)
     {
-        x = x - (f(x) / df(x));
+        x -= f(x) / df(x);
     } 
 
     return x;
@@ -82,7 +94,7 @@ int main(void)
     ld a; 
 
     scanf("%Lf", &a); 
-    printf("%.8Lf\n", newton(a, f6, df6, 6));
+    printf("%.8Lf\n", newton(a, f7, df7, 6));
 
     return 0; 
 }
