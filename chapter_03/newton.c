@@ -5,6 +5,9 @@
 typedef long double ld;
 
 
+#define e 2.718
+
+
 static ld df1(ld x)
 {
     return (-(2/(x*x)) - 2*x); 
@@ -77,6 +80,26 @@ static ld df7(ld x)
     return 2*(x-4) - 1/x;
 } 
 
+static ld f8(ld x)
+{
+    return powl(e, x) + x;
+}
+
+static ld df8(ld x)
+{
+    return powl(e, x) + 1;
+}
+
+static ld f9(ld x)
+{
+    return powl(2, x) - 1 - powl(3, -x);
+}
+
+static ld df9(ld x)
+{
+    return (powl(2, x) * logl(2)) + (powl(3, -x) * logl(3));
+}
+
 ld newton(ld val, ld (*f) (ld), ld (*df) (ld), unsigned int iterations)
 {
     ld x = val;  
@@ -94,7 +117,7 @@ int main(void)
     ld a; 
 
     scanf("%Lf", &a); 
-    printf("%.8Lf\n", newton(a, f7, df7, 6));
+    printf("%.8Lf\n", newton(a, f9, df9, 10));
 
     return 0; 
 }
