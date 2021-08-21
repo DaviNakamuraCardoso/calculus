@@ -30,6 +30,7 @@ endfunction
 [area4,ierr,nfun,err] = quad("j",0,1);
 [area5,ierr,nfun,err] = quad("k",0,1);
 [area6,ierr,nfun,err] = quad("l",0,1);
+[area7,ierr,nfun,err] = quad(@(x) (2*pi*x*sqrt(1+9*x^4)), 0,1);
 
 printf("%f\n",area); 
 printf("%f\n",area2); 
@@ -37,5 +38,6 @@ printf("%f\n",area3);
 printf("%f\n",area4); 
 printf("%f\n",area5); 
 printf("%f\n",area6); 
+printf("%f\n",area7); 
 
 
