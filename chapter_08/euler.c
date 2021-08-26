@@ -35,6 +35,16 @@ ld f3(ld x, ld y)
     return 6 * powl(x,2) - 3 * powl(x,2) * y;
 }
 
+
+ld P(ld x)
+{
+    ld n = 20 * powl(10,9);
+    ld d = 1 + (14/6) * powl(e, -x/210);
+
+    return n / d;
+}
+
+
 int main(void)
 {
     ld real, ap, error; 
@@ -60,6 +70,9 @@ int main(void)
 
     printf("%Lf\n", euler(0, f4, 0.1, 0, 0.5));
 
+    printf("%Lf\n", P(10));
+    printf("%Lf\n", P(100));
+    printf("%Lf\n", P(250));
 
     return 0; 
 }
