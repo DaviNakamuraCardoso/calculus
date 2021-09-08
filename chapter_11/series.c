@@ -43,12 +43,38 @@ ld f13(unsigned int n)
     return (ld) 1 / (pow(n, 2) + 1); 
 }
 
+// 11.3
+ld f37(unsigned int n)
+{
+    return (ld) 1 / pow(n,2);
+}
+
+ld f39(unsigned int n)
+{
+    return (ld) 1 / powl(2*n + 1, 6);
+}
+
+// 11.4
+ld f33(unsigned int n)
+{
+    return (ld) 1 / (5 + pow(n, 5)); 
+}
+
+ld f35(unsigned int n)
+{
+    return (ld) (1 / pow(5, n)) * powl(cosl(n), 2);
+}
+
 int main(void)
 {
-    series(f1, 8);
-    series(f2, 8); 
-    series(f9, 10);
-    series(f11, 10);
-    series(f13, 10);
+//    series(f1, 8);
+//    series(f2, 8); 
+//    series(f9, 10);
+//    series(f11, 10);
+//    series(f13, 10);
+//    series(f37, 10);
+//    series(f39, 10); 
+//    series(f33, 10); 
+    series(f35, 10);
     return 0; 
 }
