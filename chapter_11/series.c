@@ -1,8 +1,28 @@
 #include <stdio.h>
-#include <math.h>
+#include <stdlib.h>
+#include <math.h> 
 
  
 typedef long double ld;
+
+
+static unsigned long factl(unsigned int n)
+{
+    unsigned long f = 1;
+
+    for (unsigned int i = 1; i <= n; i++)
+        f *= n;
+
+    return f;
+}
+    
+unsigned int error_alternating_series(ld (*f) (unsigned int), ld error)
+{
+    unsigned int i = 0;
+    for (; labs(f(i)) > labs(error); i++)
+        ;
+    return i; 
+}
 
 ld series(ld (*f) (unsigned int), unsigned int n)
 {
@@ -65,6 +85,12 @@ ld f35(unsigned int n)
     return (ld) (1 / pow(5, n)) * powl(cosl(n), 2);
 }
 
+// 11.5
+ld f21(unsigned int n)
+{
+    return (ld) (powl(-0.8, n) / factl(n));
+}
+
 int main(void)
 {
 //    series(f1, 8);
@@ -75,6 +101,8 @@ int main(void)
 //    series(f37, 10);
 //    series(f39, 10); 
 //    series(f33, 10); 
-    series(f35, 10);
+//    series(f35, 10);
+//    series(f21, 10);
+    printf("%i\n", error_alternating_series(f21, powl(1/10, 4)));
     return 0; 
 }
